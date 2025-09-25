@@ -27,7 +27,7 @@ typedef struct Boat {
 int main(void)
 {
     Boat *tabPosBoat = malloc(sizeof(Boat)*nbBoat);
-
+go,gozgozgo
     tabPosBoat[0].position.x = 10;
     tabPosBoat[0].position.y = 10;
     tabPosBoat[0].orientation = 0;
