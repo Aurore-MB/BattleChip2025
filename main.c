@@ -6,41 +6,31 @@
 #define nbBoat 5
 #include "boat/boat.h"
 
-typedef struct Position {
-    int x;
-    int y;
-}Position;
-
-typedef enum BoatOrientation {
-    BOAT_HORIZONTAL,
-    BOAT_VERTICAL
-}BoatOrientation;
-
-typedef struct Boat {
-    Position position;
-    int length;
-    int orientation; //0 = horizon 1 = vertical
-    int hit;
-    int sunk;
-}Boat;
 
 int main(void)
 {
-    Boat *tabPosBoat = malloc(sizeof(Boat)*nbBoat);
+    int board[GRID_SIZE][GRID_SIZE] = {0};
 
-    tabPosBoat[0].position.x = 10;
-    tabPosBoat[0].position.y = 10;
-    tabPosBoat[0].orientation = 0;
-    tabPosBoat[1].position.x = 12;
-    tabPosBoat[1].position.y = 20;
-    tabPosBoat[1].orientation = 1;
-    tabPosBoat[2].position.x = 3;
-    tabPosBoat[2].position.y = 8;
-    //createBoard(3, 0, 3, 2);
+    // Définition des 5 navires
+    Boat porte_avions = { {0, 0}, 5, BOAT_HORIZONTAL, 0, 0 };  // Ligne A, col 1
+    Boat croiseur     = { {2, 1}, 4, BOAT_VERTICAL,   0, 0 };  // Ligne B, col 3
+    Boat destroyer1   = { {5, 5}, 3, BOAT_HORIZONTAL, 0, 0 };  // Ligne F, col 6
+    Boat destroyer2   = { {7, 2}, 3, BOAT_VERTICAL,   0, 0 };  // Ligne C, col 8
+    Boat torpilleur   = { {9, 8}, 2, BOAT_HORIZONTAL, 0, 0 };  // Ligne I, col 10
 
-    for (int i = 0; i < 3; i++) {
+    // Placement
+    place_boat(board, &porte_avions);
+    place_boat(board, &croiseur);
+    place_boat(board, &destroyer1);
+    place_boat(board, &destroyer2);
+    place_boat(board, &torpilleur);
+
+    // Affichage
+    print_board(board);
+
+    /*for (int i = 0; i < 3; i++) {
         printf("boat n %d x:%d y:%d\n", i, tabPosBoat[i].position.x, tabPosBoat[i].position.y);
-    }
+    }*/
 
 
     //char **board = createBoard();
@@ -49,7 +39,7 @@ int main(void)
     /*for (int i = 0; i < nbBoat; i++) {
         free(tabPosBoat[i]);
     }*/
-    free(tabPosBoat);
+    //free(tabPosBoat);
     //free(board);
     return 0;
 }

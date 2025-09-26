@@ -23,6 +23,7 @@ char **createBoard() {
         }
         //printf("%c", board[0][i]);  //DEBUG
     }
+
     //-------les chiffres---------
     for (int i = 1; i < 10; i++) {
         board[i][0] = ' '; board[i][1] = '0'+i; board[i][2] = ' ';
@@ -43,6 +44,9 @@ char **createBoard() {
     }
     return board;
 }
+
+
+
 
 
 
