@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "board.h"
+#include "../boat/boat.h"
 #include "../game/game.h"
 
 
@@ -44,6 +45,23 @@ char **createBoard() {
     return board;
 }
 
+//-------on modifie le tableau de plateau, et on modifie les valeurs hit/sunk------
+void modifyBoard(char **board, int x, int y, int hitMiss, int numBoat, Boat *boat ) {
+    if(hitMiss == 1) { //1 pour touché, 0 pour loupé
+        boat[numBoat].emplacement->hit = 1;
+
+        board[x+1][y*4+5] = 'X'; //remplace la valeur dans le tableau par X pour touché
+        printf("tu as touché le bateau %d\n", numBoat); //debug
+
+        if(boat[numBoat].emplacement->hit == boat[numBoat].length) {
+           // printf("Et en plus il est coulé ! \n"); //debug
+            boat[numBoat].emplacement->sunk = 1;
+        }
+
+    }else {
+        board[x*3+4][y+1] = 'o'; //remplace la valeur dans le tableau par o pour loupé
+    }
+}
 
 
 

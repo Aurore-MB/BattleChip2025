@@ -1,28 +1,13 @@
 
 #include "boat.h"
-
+#include "../board/board.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 
-typedef struct Position {
-    int x;
-    int y;
-}Position;
 
-typedef enum BoatOrientation {
-    BOAT_HORIZONTAL,
-    BOAT_VERTICAL
-}BoatOrientation;
-
-typedef struct Boat {
-    Position position;
-    int length;
-    int orientation; //0 = horizon 1 = vertical
-    int hit;
-    int sunk;
-}Boat;
-
-Boat *createBoat(int length, int orientation, int x, int y) {
+//marche pas pour le moment
+/*Boat *createBoat(int length, int orientation, int x, int y) {
     Boat *tabBoat= malloc(sizeof(Boat)*6);
     tabBoat->position.x = x;
     tabBoat->position.y = y;
@@ -31,14 +16,21 @@ Boat *createBoat(int length, int orientation, int x, int y) {
     tabBoat->hit = 0;
     tabBoat->sunk = 0;
     return tabBoat;
-}
+}*/
 
 //int * tabPosBoat()
 
-/*int hitOrMiss(int posX, int posY, char **board, Boat* boat , int nbBoat) {
-    for(int i = 0; i < nbBoat; i++) {
-        if(posX==boat->position.x[i] && posY==boat->position.y[i]) {
+int hitOrMiss(int posX, int posY, char **board, Boat* boat , int nbBoat) {
+    int i=0;
+    for(i; i < nbBoat; i++) {
+        if(posX==boat[i].position.x && posY==boat[i].position.y) {
+            modifyBoard(board, posX, posY, 1, i, boat);//1 X pour touché, 0 o pour loupé
+            printf("GG bro\n");//DEBUG
 
+            return 1;
         }
     }
-}*/
+    modifyBoard(board, posX, posY, 0,i, boat);//1 X pour touché, 0 o pour loupé
+    printf("le miss\n");//DEBUG
+    return 0;
+}
